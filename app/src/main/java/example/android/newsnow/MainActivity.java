@@ -1,5 +1,6 @@
 package example.android.newsnow;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void ShowToast () {
         Toast.makeText(this, "Find News", Toast.LENGTH_SHORT).show();
+
+        Intent showNews = new Intent(this, ShowNewsActivity.class);
+        startActivity(showNews);
     }
 }
 
