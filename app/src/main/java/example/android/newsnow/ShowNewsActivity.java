@@ -1,9 +1,13 @@
 package example.android.newsnow;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,9 +30,10 @@ public class ShowNewsActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.news_update);
 
+        mTextView.setVisibility(View.GONE);
+
         GetUrlContentTask task = new GetUrlContentTask();
         task.execute();
-
 
     }
     private URL createUrl(String stringUrl) {
@@ -37,7 +42,7 @@ public class ShowNewsActivity extends AppCompatActivity {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException exception) {
-            mTextView.setText("something went wrong");
+            mTextView.setVisibility(View.VISIBLE);;
             return null;
         }
         return url;
@@ -57,6 +62,7 @@ public class ShowNewsActivity extends AppCompatActivity {
                 jsonString = getNews.makeHttpRequest(createUrl(newURL));
 
             } catch (IOException e) {
+                mTextView.setVisibility(View.VISIBLE);
                 return null;
             }
 
@@ -72,7 +78,7 @@ public class ShowNewsActivity extends AppCompatActivity {
 
                return rootJsonObj;
             } catch (Exception e) {
-                System.out.println("error " + e);
+                mTextView.setVisibility(View.VISIBLE);
             }
             return null;
         }
@@ -86,22 +92,32 @@ public class ShowNewsActivity extends AppCompatActivity {
                 JSONObject jsonFirstLevel = rootJsonObj.getJSONObject("response");
                 JSONArray jsonDataArray = jsonFirstLevel.getJSONArray("results");
                 for (int i = 0; i < jsonDataArray.length(); i++) {
-                // pull out each item in the jason array one at a time.
+                    // pull out each item in the jason array one at a time.
                     JSONObject jsonItems = jsonDataArray.getJSONObject(i);
                     // pull the data to load in the objects.
                     String webTitle = jsonItems.optString("webTitle").toString();
                     String sectionName = jsonItems.optString("sectionName").toString();
                     String webUrl = jsonItems.optString("webUrl").toString();
                     // put them in the news item objects.
-                    newsItem.add(new NewsItem(webTitle, R.drawable.blackcat,webUrl,sectionName));
+                    newsItem.add(new NewsItem(webTitle, webUrl, sectionName));
                 }
-            }  catch (Exception e) {
-                System.out.println("error " + e);
+            } catch (Exception e) {
+                mTextView.setVisibility(View.VISIBLE);
             }
 
-            NewsViewAdaptor displayNewsAdapter = new NewsViewAdaptor (ShowNewsActivity.this, newsItem);
+            NewsViewAdaptor displayNewsAdapter = new NewsViewAdaptor(ShowNewsActivity.this, newsItem);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(displayNewsAdapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    NewsItem link = newsItem.get(position);
+
+                    Intent openBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(link.getWebURL()));
+                    startActivity(openBrowser);
+                }
+            });
         }
     }
 }

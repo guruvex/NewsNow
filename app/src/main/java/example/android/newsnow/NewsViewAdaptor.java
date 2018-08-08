@@ -54,15 +54,17 @@ public class NewsViewAdaptor extends ArrayAdapter<NewsItem> {
             NewsItem currentItem = getItem(position);
 
             // Find the TextView in the list_item.xml layout with the ID version_name
-            TextView newsText = (TextView) listItemView.findViewById(R.id.news_story_text);
+            TextView newsText = (TextView) listItemView.findViewById(R.id.news_story_catagory);
             // Get the version name from the current miwok object and
             // set this text on the name TextView
-            newsText.setText(currentItem.getTitle());
+            newsText.setText(currentItem.getSectionName());
+
+            TextView newsTitle = (TextView) listItemView.findViewById(R.id.news_story_title);
+            // Get the version name from the current miwok object and
+            // set this text on the name TextView
+            newsTitle.setText(currentItem.getTitle());
 
 
-            // Find the ImageView in the list_item.xml layout with the ID list_item_icon
-            ImageView iconView = (ImageView) listItemView.findViewById(R.id.news_image);
-            iconView.setImageResource(currentItem.getImage());
 
 
             return listItemView;
