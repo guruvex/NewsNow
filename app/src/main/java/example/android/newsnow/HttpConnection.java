@@ -18,7 +18,6 @@ public class HttpConnection {
 
     public HttpConnection() {
     }
-
     public String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
         HttpURLConnection urlConnection = null;
@@ -31,7 +30,6 @@ public class HttpConnection {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = convertStreamToString(inputStream);
-
         } catch (IOException e) {
             //handle the exception
         } finally {
@@ -44,11 +42,9 @@ public class HttpConnection {
             return jsonResponse;
         }
     }
-
     private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-
         String line;
         try {
             while ((line = reader.readLine()) != null) {

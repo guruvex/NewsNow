@@ -5,6 +5,5 @@
     <string name="rb_2_text">Weather</string>
     <string name="rb_3_text">Tech</string>
     <string name="rb_4_text">no option</string>
-
     <string name="error_has_accrued">Error Has Accrued</string>
 </resources>

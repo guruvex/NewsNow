@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+   style="@style/head_liner_layout">
+
+    <TextView
+        android:id="@+id/news_date"
+        style="@style/news_date_text_view"
+        android:hint="2018-05-27"/>
+
+    <LinearLayout
+        style="@style/split_liner_layout">
 
     <TextView
         android:id="@+id/news_story_catagory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/news_layout_text_view"
+        android:hint="news title"/>
 
     <TextView
         android:id="@+id/news_story_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        style="@style/news_layout_text_view"
+        android:hint="story"/>
+    </LinearLayout>
 </LinearLayout>
