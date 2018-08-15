@@ -28,6 +28,6 @@
     <Button
         android:id="@+id/find_news"
         style="@style/main_radio_group"
-        android:text="Find News" />
+        android:text="@string/find_news" />
 
 </LinearLayout>

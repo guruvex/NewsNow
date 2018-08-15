@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">News Now</string>
     <string name="finding_news">Finding News</string>
+    <string name="find_news">Find News</string>
     <string name="rb_1_text">Sports</string>
     <string name="rb_2_text">Weather</string>
     <string name="rb_3_text">Tech</string>

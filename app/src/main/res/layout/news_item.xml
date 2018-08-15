@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
    style="@style/head_liner_layout">
 
     <TextView
         android:id="@+id/news_date"
         style="@style/news_date_text_view"
-        android:hint="2018-05-27"/>
+        tools:Text="2018-05-27"/>
 
     <LinearLayout
         style="@style/split_liner_layout">
@@ -14,11 +15,11 @@
     <TextView
         android:id="@+id/news_story_catagory"
         style="@style/news_layout_text_view"
-        android:hint="news title"/>
+        tools:text="news title"/>
 
     <TextView
         android:id="@+id/news_story_title"
         style="@style/news_layout_text_view"
-        android:hint="story"/>
+        tools:text="story"/>
     </LinearLayout>
 </LinearLayout>
